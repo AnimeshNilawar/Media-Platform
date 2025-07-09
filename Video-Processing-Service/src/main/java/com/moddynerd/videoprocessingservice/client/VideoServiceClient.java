@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "video-service", url = "http://localhost:8080")
+@FeignClient(name = "video-service")
+//@FeignClient(name = "video-service", url = "http://localhost:8080")
 public interface VideoServiceClient {
 
     @PutMapping("/api/videos/{videoId}/status")

@@ -13,10 +13,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.moddynerd.videoservice.Utils.GenerateVideoId;
+import com.moddynerd.videoservice.client.VideoProcessingServiceClient;
 import com.moddynerd.videoservice.dao.VideoDao;
 import com.moddynerd.videoservice.dto.VideoProcessingRequest;
 import com.moddynerd.videoservice.model.VideoDetails;
@@ -28,13 +28,10 @@ public class VideoService {
     VideoDao videoDao;
 
     @Autowired
-    private RestTemplate restTemplate;
+    private VideoProcessingServiceClient videoProcessingServiceClient;
 
     @Value("${video.upload.directory}")
     private String uploadDirectory;
-
-    @Value("${video.processing.service.url:http://localhost:8090}")
-    private String videoProcessingServiceUrl;
 
     public ResponseEntity<String> saveVideoDetails(MultipartFile file, String title, String description,
             Boolean isPublic, String channelId, String uploaderId) {
@@ -85,7 +82,7 @@ public class VideoService {
         // Save the details to the database
         videoDao.save(videoDetails);
 
-        // Send request to video processing service
+        // Send request to video processing service using Feign client
         try {
             VideoProcessingRequest processingRequest = new VideoProcessingRequest();
             processingRequest.setVideoId(videoId);
@@ -96,8 +93,7 @@ public class VideoService {
             processingRequest.setUploaderId(uploaderId);
             processingRequest.setChannelId(channelId);
 
-            restTemplate.postForObject(videoProcessingServiceUrl + "/video/process/init", processingRequest,
-                    String.class);
+            videoProcessingServiceClient.processVideo(processingRequest);
         } catch (Exception e) {
             e.printStackTrace();
             // Continue even if processing service call fails - the video is already saved

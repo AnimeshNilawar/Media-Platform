@@ -5,13 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bf0183f-b5ce-4891-838e-0fcd433126a9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Video-Processing-Service/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Video-Processing-Service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Video-Processing-Service/src/main/java/com/moddynerd/videoprocessingservice/VideoProcessingServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Video-Processing-Service/src/main/java/com/moddynerd/videoprocessingservice/controller/VideoProcessingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Video-Processing-Service/src/main/java/com/moddynerd/videoprocessingservice/model/VideoProcessingRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Video-Processing-Service/src/main/java/com/moddynerd/videoprocessingservice/service/VideoProcessingService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Video-Processing-Service/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/client/VideoProcessingServiceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-Processing-Service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-Processing-Service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-Processing-Service/src/main/java/com/moddynerd/videoprocessingservice/client/VideoServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-Processing-Service/src/main/java/com/moddynerd/videoprocessingservice/client/VideoServiceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-Processing-Service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-Processing-Service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/VideoServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/VideoServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/config/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/service/VideoProcessingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/service/VideoProcessingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/service/VideoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/service/VideoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/moddynerd/eurekaserver/EurekaServerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/moddynerd/eurekaserver/EurekaServerApplication.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,21 +26,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "AnimeshNilawar"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;AnimeshNilawar&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/AnimeshNilawar/Media-Platform.git",
-    "accountId": "4547f51e-abd4-4ae1-b298-8b581caa13a0"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AnimeshNilawar/Media-Platform.git&quot;,
+    &quot;accountId&quot;: &quot;4547f51e-abd4-4ae1-b298-8b581caa13a0&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2zcVHlFdz0Og2qsOWcqCXoGpULT" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -44,8 +49,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.EurekaServerApplication.executor": "Run",
     "git-widget-placeholder": "master",
     "last_opened_file_path": "/home/moddynerd/Downloads/Java-Practice/Media Platform/eureka-server",
     "node.js.detected.package.eslint": "true",
@@ -81,6 +91,7 @@
       <option name="presentableId" value="Default" />
       <updated>1752030262833</updated>
       <workItem from="1752030263872" duration="602000" />
+      <workItem from="1752047062794" duration="2071000" />
     </task>
     <servers />
   </component>
