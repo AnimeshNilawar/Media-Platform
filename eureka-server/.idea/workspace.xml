@@ -5,16 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bf0183f-b5ce-4891-838e-0fcd433126a9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/client/VideoProcessingServiceClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Video-Processing-Service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-Processing-Service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Video-Processing-Service/src/main/java/com/moddynerd/videoprocessingservice/client/VideoServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-Processing-Service/src/main/java/com/moddynerd/videoprocessingservice/client/VideoServiceClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Video-Processing-Service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-Processing-Service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Video-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/VideoServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/VideoServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/config/AppConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/service/VideoProcessingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/service/VideoProcessingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/service/VideoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/service/VideoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/src/main/java/com/moddynerd/videostreaming/VideoStreamingApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/src/main/java/com/moddynerd/videostreaming/controller/StreamingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/src/main/java/com/moddynerd/videostreaming/dao/VideoDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/src/main/java/com/moddynerd/videostreaming/model/VideoDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/src/main/java/com/moddynerd/videostreaming/model/VideoStreamInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/src/main/java/com/moddynerd/videostreaming/model/VideoSummaryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/src/main/java/com/moddynerd/videostreaming/service/StreamingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/src/main/resources/static/video-player.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-Streaming/src/test/java/com/moddynerd/videostreaming/VideoStreamingApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../api-gateway/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../api-gateway/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../api-gateway/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../api-gateway/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../api-gateway/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../api-gateway/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../api-gateway/src/main/java/com/moddynerd/apigateway/ApiGatewayApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../api-gateway/src/main/java/com/moddynerd/apigateway/CorsConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../api-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/controller/StreamingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/controller/StreamingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/resources/static/video-player.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/resources/static/video-player.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/resources/static/videos/uploaded_video.mp4" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/moddynerd/eurekaserver/EurekaServerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/moddynerd/eurekaserver/EurekaServerApplication.class" afterDir="false" />
     </list>
@@ -46,26 +64,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.EurekaServerApplication.executor": "Run",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/moddynerd/Downloads/Java-Practice/Media Platform/eureka-server",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/moddynerd/Downloads/Java-Practice/Media Platform/eureka-server&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="EurekaServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="eureka-server" />
@@ -91,7 +109,8 @@
       <option name="presentableId" value="Default" />
       <updated>1752030262833</updated>
       <workItem from="1752030263872" duration="602000" />
-      <workItem from="1752047062794" duration="2071000" />
+      <workItem from="1752047062794" duration="3600000" />
+      <workItem from="1752148404232" duration="5631000" />
     </task>
     <servers />
   </component>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HLS Video Player</title>
+    <script src="https://vjs.zencdn.net/8.2.0/video.js"></script>
+    <link href="https://vjs.zencdn.net/8.2.0/video-js.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .video-container {
+            margin: 20px 0;
+        }
+        .quality-info {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+        }
+        .input-group {
+            margin: 10px 0;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 5px;
+            margin: 0 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>HLS Video Player Demo</h1>
+
+    <div class="input-group">
+        <label>Video ID:</label>
+        <input type="text" id="videoId" placeholder="Enter video ID">
+        <button onclick="loadVideo()">Load Video</button>
+    </div>
+
+    <div class="video-container">
+        <video-js
+            id="video-player"
+            class="vjs-default-skin"
+            controls
+            preload="auto"
+            width="800"
+            height="450"
+            data-setup='{}'>
+            <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a web browser that
+                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>.
+            </p>
+        </video-js>
+    </div>
+
+    <div class="quality-info">
+        <h3>How it works:</h3>
+        <ul>
+            <li>Videos are automatically segmented into 6-second chunks</li>
+            <li>Multiple quality levels are available (240p, 360p, 720p, 1080p)</li>
+            <li>Player automatically switches quality based on network conditions</li>
+            <li>Only segments being watched are downloaded</li>
+        </ul>
+    </div>
+
+    <script>
+        let player;
+
+        // Initialize Video.js player
+        document.addEventListener('DOMContentLoaded', function() {
+            player = videojs('video-player', {
+                fluid: true,
+                responsive: true,
+                html5: {
+                    hls: {
+                        enableLowInitialPlaylist: true,
+                        smoothQualityChange: true
+                    }
+                }
+            });
+
+            // Add HLS quality selector
+            player.ready(function() {
+                console.log('Player is ready');
+            });
+        });
+
+        function loadVideo() {
+            const videoId = document.getElementById('videoId').value.trim();
+            if (!videoId) {
+                alert('Please enter a video ID');
+                return;
+            }
+
+            // Check if video is ready
+            fetch(`/stream/${videoId}/stream-info`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Video not found or not ready');
+                    }
+                    return response.json();
+                })
+                .then(info => {
+                    if (info.status === 'ready') {
+                        // Load the master playlist
+                        const masterPlaylistUrl = `http://localhost:7000/stream/${videoId}/master.m3u8`;
+                        player.src({
+                            src: masterPlaylistUrl,
+                            type: 'application/x-mpegURL'
+                        });
+                        console.log('Loading video:', masterPlaylistUrl);
+                    } else {
+                        alert('Video is still processing. Please try again later.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading video:', error);
+                    alert('Error loading video: ' + error.message);
+                });
+        }
+
+        // Example usage
+        window.addEventListener('load', function() {
+            // You can auto-load a video for testing
+            // document.getElementById('videoId').value = 'your-video-id-here';
+            // loadVideo();
+        });
+    </script>
+</body>
+</html>

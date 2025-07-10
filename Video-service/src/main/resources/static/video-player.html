@@ -108,7 +108,7 @@
             }
 
             // Check if video is ready
-            fetch(`/stream/${videoId}/info`)
+            fetch(`/stream/${videoId}/stream-info`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Video not found or not ready');
