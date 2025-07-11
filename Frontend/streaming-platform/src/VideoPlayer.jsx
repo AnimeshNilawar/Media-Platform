@@ -172,7 +172,7 @@ const VideoPlayer = () => {
 
     return (
         <div className="video-player-container">
-            <h1>HLS Video Player Demo</h1>
+            <h1>Video Player</h1>
 
             <div className="input-group">
                 <label>Video ID:</label>
