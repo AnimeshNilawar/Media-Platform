@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5bf0183f-b5ce-4891-838e-0fcd433126a9" name="Changes" comment="" />
+    <list default="true" id="5bf0183f-b5ce-4891-838e-0fcd433126a9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Frontend/streaming-platform/src/Auth.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Frontend/streaming-platform/src/Auth.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Frontend/streaming-platform/src/AuthPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/streaming-platform/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/streaming-platform/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/streaming-platform/src/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/streaming-platform/src/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/streaming-platform/src/VideoPlayer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/streaming-platform/src/VideoPlayer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api-gateway/src/main/java/com/moddynerd/apigateway/AuthTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../api-gateway/src/main/java/com/moddynerd/apigateway/AuthTokenFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../api-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,7 +92,7 @@
       <workItem from="1752030263872" duration="602000" />
       <workItem from="1752047062794" duration="3600000" />
       <workItem from="1752148404232" duration="5631000" />
-      <workItem from="1752303264724" duration="1349000" />
+      <workItem from="1752303264724" duration="1974000" />
     </task>
     <servers />
   </component>
