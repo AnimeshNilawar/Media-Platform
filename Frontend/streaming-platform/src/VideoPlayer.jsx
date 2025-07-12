@@ -1,13 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './VideoPlayer.css';
 
 const VideoPlayer = () => {
     const videoRef = useRef(null);
     const playerRef = useRef(null);
+    const location = useLocation();
     const [videoId, setVideoId] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [, setIsLoading] = useState(false);
     const [videoDetails, setVideoDetails] = useState(null);
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
+    // Extract videoId from URL query param
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const id = params.get('id') || '';
+        setVideoId(id);
+    }, [location.search]);
 
     useEffect(() => {
         // Load Video.js script and CSS
@@ -61,9 +70,18 @@ const VideoPlayer = () => {
         };
     }, []);
 
+    const getAuthHeaders = () => {
+        const token = localStorage.getItem('token');
+        return token ? { 'Authorization': `Bearer ${token}` } : {};
+    };
+
     const loadVideoDetails = async (videoId) => {
         try {
-            const response = await fetch(`http://localhost:8765/stream/${videoId}/details`);
+            const response = await fetch(`http://localhost:8765/stream/${videoId}/details`, {
+                headers: {
+                    ...getAuthHeaders()
+                }
+            });
             if (response.ok) {
                 const details = await response.json();
                 setVideoDetails(details);
@@ -116,7 +134,6 @@ const VideoPlayer = () => {
     const loadVideo = async () => {
         const trimmedVideoId = videoId.trim();
         if (!trimmedVideoId) {
-            alert('Please enter a video ID');
             return;
         }
 
@@ -126,7 +143,11 @@ const VideoPlayer = () => {
 
         try {
             // Check if video is ready
-            const response = await fetch(`http://localhost:8765/stream/${trimmedVideoId}/stream-info`);
+            const response = await fetch(`http://localhost:8765/stream/${trimmedVideoId}/stream-info`, {
+                headers: {
+                    ...getAuthHeaders()
+                }
+            });
 
             if (!response.ok) {
                 throw new Error('Video not found or not ready');
@@ -160,34 +181,19 @@ const VideoPlayer = () => {
         }
     };
 
-    const handleInputChange = (e) => {
-        setVideoId(e.target.value);
-    };
 
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
+    // Auto-load video when videoId changes
+    useEffect(() => {
+        if (videoId) {
             loadVideo();
         }
-    };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [videoId]);
 
     return (
         <div className="video-player-container">
             <h1>Video Player</h1>
-
-            <div className="input-group">
-                <label>Video ID:</label>
-                <input
-                    type="text"
-                    value={videoId}
-                    onChange={handleInputChange}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Enter video ID"
-                    disabled={isLoading}
-                />
-                <button onClick={loadVideo} disabled={isLoading}>
-                    {isLoading ? 'Loading...' : 'Load Video'}
-                </button>
-            </div>
+            {/* Video ID is now taken from URL, no input box */}
 
             <div className="video-container">
                 <video

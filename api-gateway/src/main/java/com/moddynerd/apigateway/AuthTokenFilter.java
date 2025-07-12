@@ -37,8 +37,13 @@ public class AuthTokenFilter implements WebFilter {
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         String path = exchange.getRequest().getURI().getPath();
 
+        if (exchange.getRequest().getMethod().name().equalsIgnoreCase("OPTIONS")) {
+            return chain.filter(exchange);
+        }
+
         // Skip token check for login and registration paths
-        if (path.startsWith("/user/login") || path.startsWith("/user/register")) {
+        if (path.startsWith("/user/login") || path.startsWith("/user/register") || path.endsWith(".m3u8") ||
+                path.endsWith(".ts")) {
             return chain.filter(exchange);
         }
 

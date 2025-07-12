@@ -4,26 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5bf0183f-b5ce-4891-838e-0fcd433126a9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../User-Service/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/UserServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/Utils/JwtUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/Utils/UserIdGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/dao/UserRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/model/UserDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../User-Service/src/test/java/com/moddynerd/userservice/UserServiceApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../api-gateway/src/main/java/com/moddynerd/apigateway/AuthTokenFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api-gateway/pom.xml" afterDir="false" />
-    </list>
+    <list default="true" id="5bf0183f-b5ce-4891-838e-0fcd433126a9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,7 +80,7 @@
       <workItem from="1752030263872" duration="602000" />
       <workItem from="1752047062794" duration="3600000" />
       <workItem from="1752148404232" duration="5631000" />
-      <workItem from="1752303264724" duration="605000" />
+      <workItem from="1752303264724" duration="1349000" />
     </task>
     <servers />
   </component>

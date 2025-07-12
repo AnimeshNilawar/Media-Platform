@@ -7,8 +7,12 @@ import com.moddynerd.userservice.Utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -20,22 +24,27 @@ public class UserService {
 
     private String UID = UserIdGenerator.generate();
 
-    public String register(UserDetails user) {
+    public ResponseEntity<Map<String, Object>> register(UserDetails user) {
+        Map<String, Object> response = new HashMap<>();
         if (userRepo.findByUsername(user.getUsername()).isPresent()) {
-            return null;
+            response.put("message", "Username already exists");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setId(UID);
         userRepo.save(user);
-        return "User registered successfully";
+        response.put("message", "User registered successfully");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    public String login(UserDetails loginRequest) {
+    public ResponseEntity<Map<String, Object>> login(UserDetails loginRequest) {
+        Map<String, Object> response = new HashMap<>();
         Optional<UserDetails> userOpt = userRepo.findByUsername(loginRequest.getUsername());
         if (userOpt.isPresent() && passwordEncoder.matches(loginRequest.getPassword(), userOpt.get().getPassword())) {
-            return jwtUtil.generateToken(userOpt.get().getId());
+            response.put("token", jwtUtil.generateToken(userOpt.get().getId()));
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         }
-        return null;
+        response.put("message", "Invalid credentials");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 }
-

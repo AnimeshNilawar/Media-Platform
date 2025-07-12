@@ -15,19 +15,11 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserDetails user) {
-        String result = userService.register(user);
-        if (result == null) {
-            return ResponseEntity.badRequest().body("Username already exists");
-        }
-        return ResponseEntity.ok(result);
+        return userService.register(user);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserDetails loginRequest) {
-        String token = userService.login(loginRequest);
-        if (token != null) {
-            return ResponseEntity.ok(token);
-        }
-        return ResponseEntity.status(401).body("Invalid credentials");
+        return userService.login(loginRequest);
     }
 }
