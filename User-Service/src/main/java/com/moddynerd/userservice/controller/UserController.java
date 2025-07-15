@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import com.moddynerd.userservice.model.UserDetails;
 import com.moddynerd.userservice.service.UserService;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -21,5 +24,10 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserDetails loginRequest) {
         return userService.login(loginRequest);
+    }
+
+    @PostMapping("/batch")
+    public Map<String, String> getUsernames(@RequestBody List<String> userIds) {
+        return userService.getUsernames(userIds);
     }
 }

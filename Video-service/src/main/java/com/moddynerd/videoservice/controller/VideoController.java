@@ -53,4 +53,9 @@ public class VideoController {
         }
     }
 
+    @GetMapping("/check/{videoId}")
+    public boolean checkVideoExists(@PathVariable String videoId) {
+        return videoService.checkVideoExists(videoId);
+    }
+
 }

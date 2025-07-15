@@ -15,8 +15,5 @@ public class VideoSummaryDTO {
     private String duration;
     private Boolean isPublic;
     private String viewCount;
-    private String likeCount; // Number of likes
-    private String dislikeCount; // Number of dislikes
-    private String commentCount; // Number of comments
     private String publishedAt;
 }

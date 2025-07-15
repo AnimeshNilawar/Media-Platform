@@ -126,9 +126,6 @@ public class StreamingService {
                     video.getDuration(),
                     video.getIsPublic(),
                     video.getViewCount(),
-                    video.getLikeCount(),
-                    video.getDislikeCount(),
-                    video.getCommentCount(),
                     video.getPublishedAt()
             ));
         } catch (Exception e) {

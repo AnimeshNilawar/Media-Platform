@@ -69,10 +69,6 @@ public class VideoService {
         videoDetails.setIsPublic(isPublic);
         videoDetails.setDuration(duration);
         videoDetails.setViewCount("0");
-        videoDetails.setLikeCount("0");
-        videoDetails.setDislikeCount("0");
-        videoDetails.setCommentCount("0");
-        videoDetails.setChannelId(channelId);
         videoDetails.setUploaderId(uploaderId);
         videoDetails.setUploadStatus("Processing");
         videoDetails.setPublishedAt(java.time.LocalDateTime.now().toString());
@@ -223,4 +219,16 @@ public class VideoService {
         }
     }
 
+    public boolean checkVideoExists(String videoId) {
+        try {
+            if (videoDao.existsById(videoId)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

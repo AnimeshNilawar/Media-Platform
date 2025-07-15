@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,5 +47,18 @@ public class UserService {
         }
         response.put("message", "Invalid credentials");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+    }
+
+    public Map<String, String> getUsernames(List<String> userIds) {
+        Map<String, String> usernames = new HashMap<>();
+        for (String userId : userIds) {
+            Optional<UserDetails> userOpt = userRepo.findById(userId);
+            if (userOpt.isPresent()) {
+                usernames.put(userId, userOpt.get().getUsername());
+            } else {
+                usernames.put(userId, "Unknown User");
+            }
+        }
+        return usernames;
     }
 }
