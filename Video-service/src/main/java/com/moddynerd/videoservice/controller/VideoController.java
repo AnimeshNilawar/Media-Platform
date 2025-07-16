@@ -82,7 +82,7 @@ public class VideoController {
         return videoService.uploadThumbnail(videoId, file, userId);
     }
 
-    @GetMapping("/{videoId}/thumbnail")z
+    @GetMapping("/{videoId}/thumbnail")
     public ResponseEntity<byte[]> getThumbnail(@PathVariable String videoId) {
         return videoService.getThumbnail(videoId);
     }

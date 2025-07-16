@@ -11,7 +11,8 @@ const VideoPlayer = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [videoDetails, setVideoDetails] = useState(null);
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-    const [aspectRatio, setAspectRatio] = useState('16:9');
+    const [aspectRatio, setAspectRatio] = useState('16:9'); // Used only for initial setup
+    const [videoJsLoaded, setVideoJsLoaded] = useState(false);
 
     // Extract videoId from URL query param
     useEffect(() => {
@@ -20,9 +21,14 @@ const VideoPlayer = () => {
         setVideoId(id);
     }, [location.search]);
 
+    // Load Video.js only once
     useEffect(() => {
-        // Load Video.js script and CSS
         const loadVideoJS = () => {
+            if (window.videojs) {
+                setVideoJsLoaded(true);
+                return;
+            }
+
             // Load CSS
             const link = document.createElement('link');
             link.rel = 'stylesheet';
@@ -33,63 +39,84 @@ const VideoPlayer = () => {
             const script = document.createElement('script');
             script.src = 'https://vjs.zencdn.net/8.2.0/video.js';
             script.onload = () => {
-                initializePlayer();
+                setVideoJsLoaded(true);
             };
             document.head.appendChild(script);
         };
 
-        const initializePlayer = () => {
-            if (window.videojs && videoRef.current) {
-                playerRef.current = window.videojs(videoRef.current, {
-                    fluid: true,
-                    responsive: true,
-                    aspectRatio: aspectRatio,
-                    html5: {
-                        hls: {
-                            enableLowInitialPlaylist: true,
-                            smoothQualityChange: true
-                        }
-                    }
-                });
+        loadVideoJS();
+    }, []);
 
-                playerRef.current.ready(() => {
-                    console.log('Player is ready');
-                    
-                    // Listen for video metadata to determine aspect ratio
-                    playerRef.current.on('loadedmetadata', () => {
-                        const videoElement = playerRef.current.el().querySelector('video');
-                        if (videoElement) {
-                            const { videoWidth, videoHeight } = videoElement;
-                            const ratio = videoWidth / videoHeight;
-                            
-                            // Determine if video is portrait or landscape
-                            if (ratio < 1) {
-                                setAspectRatio('9:16');
-                                containerRef.current?.classList.add('portrait-video');
-                            } else {
-                                setAspectRatio('16:9');
-                                containerRef.current?.classList.remove('portrait-video');
-                            }
-                        }
-                    });
-                });
-            }
-        };
+    // Initialize player only when Video.js is loaded
+    useEffect(() => {
+        if (!videoJsLoaded || !videoRef.current) return;
 
-        // Check if Video.js is already loaded
-        if (window.videojs) {
-            initializePlayer();
-        } else {
-            loadVideoJS();
+        // Dispose existing player if it exists
+        if (playerRef.current) {
+            playerRef.current.dispose();
+            playerRef.current = null;
         }
 
-        // Cleanup
+        playerRef.current = window.videojs(videoRef.current, {
+            fluid: true,
+            responsive: true,
+            aspectRatio: aspectRatio,
+            html5: {
+                hls: {
+                    enableLowInitialPlaylist: true,
+                    smoothQualityChange: true
+                }
+            },
+            playbackRates: [0.5, 1, 1.25, 1.5, 2],
+            controls: true,
+            preload: 'auto'
+        });
+
+        playerRef.current.ready(() => {
+            console.log('Player is ready');
+
+            // Listen for video metadata to determine aspect ratio
+            playerRef.current.on('loadedmetadata', () => {
+                const videoElement = playerRef.current.el().querySelector('video');
+                if (videoElement) {
+                    const { videoWidth, videoHeight } = videoElement;
+                    console.log('Video dimensions:', videoWidth, 'x', videoHeight);
+
+                    const ratio = videoWidth / videoHeight;
+                    // Determine if video is portrait or landscape
+                    const isPortrait = ratio < 1;
+
+                    // Only update container class, do NOT re-initialize player
+                    if (containerRef.current) {
+                        if (isPortrait) {
+                            containerRef.current.classList.add('portrait-video');
+                            containerRef.current.classList.remove('landscape-video');
+                        } else {
+                            containerRef.current.classList.add('landscape-video');
+                            containerRef.current.classList.remove('portrait-video');
+                        }
+                    }
+                }
+            });
+
+            // Handle errors
+            playerRef.current.on('error', (error) => {
+                console.error('Video player error:', error);
+            });
+        });
+
+        // Cleanup function
         return () => {
             if (playerRef.current) {
-                playerRef.current.dispose();
+                try {
+                    playerRef.current.dispose();
+                    playerRef.current = null;
+                } catch (error) {
+                    console.error('Error disposing player:', error);
+                }
             }
         };
-    }, [aspectRatio]);
+    }, [aspectRatio, videoJsLoaded]); // Remove aspectRatio from dependency array
 
     const getAuthHeaders = () => {
         const token = localStorage.getItem('token');
@@ -204,26 +231,23 @@ const VideoPlayer = () => {
 
     // Auto-load video when videoId changes
     useEffect(() => {
-        if (videoId) {
+        if (videoId && videoJsLoaded) {
             loadVideo();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [videoId]);
+    }, [videoId, videoJsLoaded]);
 
     return (
         <div className="video-player-container">
-            <div className="header">
-                <h1>Video Player</h1>
-                {isLoading && (
-                    <div className="loading-indicator">
-                        <div className="spinner"></div>
-                        <span>Loading video...</span>
-                    </div>
-                )}
-            </div>
+            {isLoading && (
+                <div className="loading-indicator">
+                    <div className="spinner"></div>
+                    <span>Loading video...</span>
+                </div>
+            )}
 
             <div className="video-wrapper">
-                <div 
+                <div
                     ref={containerRef}
                     className={`video-container ${aspectRatio === '9:16' ? 'portrait-video' : 'landscape-video'}`}
                 >
@@ -233,6 +257,8 @@ const VideoPlayer = () => {
                         controls
                         preload="auto"
                         data-setup="{}"
+                        playsInline
+                        webkit-playsinline="true"
                     >
                         <p className="vjs-no-js">
                             To view this video please enable JavaScript, and consider upgrading to a web browser that{' '}
@@ -251,19 +277,19 @@ const VideoPlayer = () => {
                             <div className="video-meta">
                                 <span className="video-views">
                                     <svg className="icon" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
                                     </svg>
                                     {formatViewCount(videoDetails.viewCount)} views
                                 </span>
                                 <span className="video-date">
                                     <svg className="icon" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" />
                                     </svg>
                                     {formatDate(videoDetails.publishedAt)}
                                 </span>
                                 <span className="video-duration">
                                     <svg className="icon" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
                                     </svg>
                                     {formatDuration(parseInt(videoDetails.duration))}
                                 </span>
@@ -274,19 +300,19 @@ const VideoPlayer = () => {
                             <div className="engagement-buttons">
                                 <button className="like-btn">
                                     <svg className="icon" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z"/>
+                                        <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z" />
                                     </svg>
                                     {formatViewCount(videoDetails.likeCount)}
                                 </button>
                                 <button className="dislike-btn">
                                     <svg className="icon" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v1.91l.01.01L1 14c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/>
+                                        <path d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v1.91l.01.01L1 14c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z" />
                                     </svg>
                                     {formatViewCount(videoDetails.dislikeCount)}
                                 </button>
                                 <button className="share-btn">
                                     <svg className="icon" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
                                     </svg>
                                     Share
                                 </button>
@@ -304,7 +330,7 @@ const VideoPlayer = () => {
                                     <strong>Comments:</strong> {videoDetails.commentCount}
                                 </div>
                                 <div className="stat-item">
-                                    <strong>Visibility:</strong> 
+                                    <strong>Visibility:</strong>
                                     <span className={`visibility-badge ${videoDetails.isPublic ? 'public' : 'private'}`}>
                                         {videoDetails.isPublic ? 'Public' : 'Private'}
                                     </span>

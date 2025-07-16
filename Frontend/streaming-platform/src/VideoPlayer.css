@@ -1,26 +1,18 @@
 /* Enhanced Video Player Styles */
 .video-player-container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  width: 100vw;
   min-height: 100vh;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 30px;
-  position: relative;
-}
-
-.header h1 {
-  color: #2c3e50;
-  font-size: 2.5rem;
   margin: 0;
-  font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: linear-gradient(135deg, #232526 0%, #414345 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
+
 
 .loading-indicator {
   display: flex;
@@ -48,12 +40,22 @@
 
 .video-wrapper {
   display: flex;
-  gap: 20px;
+  flex-direction: row;
+  gap: 2rem;
+  margin: 2rem auto 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 500px;
+  justify-content: center;
   align-items: flex-start;
+  background: rgba(30, 34, 40, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  padding: 2.5rem 2rem 2.5rem 2rem;
+  box-sizing: border-box;
 }
 
 .video-container {
-  flex: 1;
   background: #000;
   border-radius: 12px;
   overflow: hidden;
@@ -70,14 +72,33 @@
 /* Landscape video styling */
 .landscape-video {
   aspect-ratio: 16/9;
+  width: 900px;
+  height: 506px;
   max-width: 100%;
+  margin: 0 auto;
 }
 
 /* Portrait video styling */
+
 .portrait-video {
   aspect-ratio: 9/16;
   max-width: 400px;
+  min-height: 600px;
+  width: 100%;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Ensure .video-js fills portrait container properly */
+.portrait-video .video-js {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 /* Video.js player styling */
@@ -358,50 +379,53 @@
 }
 
 /* Responsive Design */
+@media (max-width: 900px) {
+  .video-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.2rem 1rem 1.2rem 1rem;
+    min-height: unset;
+  }
+}
+
 @media (max-width: 768px) {
   .video-player-container {
-    padding: 15px;
+    padding: 0;
+    width: 100vw;
   }
-  
   .header h1 {
     font-size: 2rem;
   }
-  
   .video-wrapper {
     flex-direction: column;
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    min-height: unset;
   }
-  
   .portrait-video {
     max-width: 100%;
   }
-  
   .video-details {
     padding: 20px;
   }
-  
   .video-title {
     font-size: 1.4rem;
   }
-  
   .video-meta {
     flex-direction: column;
     gap: 10px;
   }
-  
   .engagement-buttons {
     justify-content: center;
   }
-  
   .engagement-buttons button {
     flex: 1;
     justify-content: center;
     min-width: 100px;
   }
-  
   .info-grid {
     grid-template-columns: 1fr;
   }
-  
   .video-stats {
     grid-template-columns: 1fr;
   }

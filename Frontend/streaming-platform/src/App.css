@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -44,7 +44,7 @@ body {
 
 .read-the-docs {
   color: #888;
-}
+} */
 
 .upload-container {
   max-width: 500px;
@@ -101,34 +101,3 @@ body {
   color: #d32f2f;
   font-weight: 500;
 }
-
-.navbar {
-  background: #222;
-  padding: 1rem 0;
-  margin-bottom: 2rem;
-}
-.navbar ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin: 0;
-  padding: 0;
-}
-.navbar a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-.navbar a:hover {
-  color: #646cff;
-}
-
-.video-js {
-  width: 800px !important;
-  height: 450px !important;
-  background: black; /* Helps see if player is present */
-}
-
