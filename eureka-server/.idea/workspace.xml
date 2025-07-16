@@ -5,39 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bf0183f-b5ce-4891-838e-0fcd433126a9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/EngagementServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/client/UserClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/client/VideoClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/controller/CommentsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/controller/LikeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/dao/CommentsDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/dao/LikeDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/model/comment/Comment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/model/comment/CommentDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/model/comment/GetCommentDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/model/like/Like.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/model/like/LikeDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/service/CommentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/service/LikeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Engagement-Service/src/test/java/com/moddynerd/engagementservice/EngagementServiceApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/client/VideoClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/model/UserDetailsDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/model/VideoDetailsDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/client/VideoClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/client/VideoClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/streaming-platform/src/VideoPlayer.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/streaming-platform/src/VideoPlayer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/streaming-platform/src/VideoPlayer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/streaming-platform/src/VideoPlayer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/streaming-platform/src/VideoUpload.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/streaming-platform/src/VideoUpload.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../User-Service/src/main/java/com/moddynerd/userservice/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Video-Streaming/src/main/java/com/moddynerd/videostreaming/model/VideoDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-Streaming/src/main/java/com/moddynerd/videostreaming/model/VideoDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Video-Streaming/src/main/java/com/moddynerd/videostreaming/model/VideoSummaryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-Streaming/src/main/java/com/moddynerd/videostreaming/model/VideoSummaryDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Video-Streaming/src/main/java/com/moddynerd/videostreaming/service/StreamingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-Streaming/src/main/java/com/moddynerd/videostreaming/service/StreamingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User-Service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../User-Service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/controller/VideoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/controller/VideoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/model/VideoDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/model/VideoDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/dao/VideoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/dao/VideoDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/service/VideoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/service/VideoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api-gateway/src/main/java/com/moddynerd/apigateway/AuthTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../api-gateway/src/main/java/com/moddynerd/apigateway/AuthTokenFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../api-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -117,7 +99,7 @@
       <workItem from="1752148404232" duration="5631000" />
       <workItem from="1752303264724" duration="1974000" />
       <workItem from="1752477724703" duration="1210000" />
-      <workItem from="1752521396603" duration="3114000" />
+      <workItem from="1752521396603" duration="5587000" />
     </task>
     <servers />
   </component>

@@ -29,9 +29,11 @@ const VideoUpload = () => {
             })
         );
         try {
+            const token = localStorage.getItem('token');
             const res = await fetch("http://localhost:8765/video/upload", {
                 method: "POST",
                 body: formData,
+                headers: token ? { Authorization: `Bearer ${token}` } : {},
             });
             if (res.ok) {
                 setStatus("Upload successful!");

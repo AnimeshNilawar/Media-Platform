@@ -1,6 +1,7 @@
 package com.moddynerd.videoservice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.moddynerd.videoservice.model.VideoDetailsDTO;
 import com.moddynerd.videoservice.service.VideoService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,4 +59,31 @@ public class VideoController {
         return videoService.checkVideoExists(videoId);
     }
 
+    @GetMapping("/{userId}/videos")
+    public ResponseEntity<?> getUserVideos(@PathVariable String userId) {
+        return videoService.getUserVideos(userId);
+    }
+
+    @PutMapping("/{videoId}")
+    public ResponseEntity<String> updateVideoDetails(
+            @PathVariable String videoId,
+            @RequestBody VideoDetailsDTO videoDetailsDTO,
+            @RequestHeader("X-User-Id") String userId
+    ){
+        return videoService.updateVideoDetails(videoId, videoDetailsDTO, userId);
+    }
+
+    @PostMapping("/{videoId}/thumbnail")
+    public ResponseEntity<String> uploadThumbnail(
+            @PathVariable String videoId,
+            @RequestParam("file") MultipartFile file,
+            @RequestHeader("X-User-Id") String userId
+    ){
+        return videoService.uploadThumbnail(videoId, file, userId);
+    }
+
+    @GetMapping("/{videoId}/thumbnail")z
+    public ResponseEntity<byte[]> getThumbnail(@PathVariable String videoId) {
+        return videoService.getThumbnail(videoId);
+    }
 }

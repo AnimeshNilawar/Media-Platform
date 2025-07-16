@@ -3,11 +3,17 @@ package com.moddynerd.videoservice.service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
+import com.moddynerd.videoservice.model.VideoDetailsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -32,6 +38,9 @@ public class VideoService {
 
     @Value("${video.upload.directory}")
     private String uploadDirectory;
+
+    @Value("${thumbnail.upload.directory}")
+    private String thumbnailUploadDirectory;
 
     public ResponseEntity<String> saveVideoDetails(MultipartFile file, String title, String description,
             Boolean isPublic, String channelId, String uploaderId) {
@@ -230,5 +239,118 @@ public class VideoService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public ResponseEntity<List<VideoDetailsDTO>> getUserVideos(String userId) {
+        // Get all videos uploaded by a specific user and return as a list
+        try {
+            List<VideoDetails> videos = videoDao.findByUploaderId(userId);
+            if (videos == null || videos.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+
+            // Convert VideoDetails to VideoDetailsDTO
+            List<VideoDetailsDTO> videoDetailsDTOs = videos.stream()
+                    .filter(video -> video.getErrorDetails() == null)
+                    .map(video -> new VideoDetailsDTO(video.getId(), video.getTitle(), video.getDescription(),
+                            video.getThumbnailUrl(), video.getDuration(), video.getIsPublic(),
+                            video.getViewCount(), video.getUploadStatus(),
+                            video.getPublishedAt()))
+                    .toList();
+
+            return ResponseEntity.ok(videoDetailsDTOs);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    public ResponseEntity<String> updateVideoDetails(String videoId, VideoDetailsDTO videoDetailsDTO, String userId) {
+        try {
+            VideoDetails videoDetails = videoDao.findById(videoId).orElse(null);
+            if (videoDetails == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Video not found");
+            }
+            if (!Objects.equals(videoDetails.getUploaderId(), userId)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You can only update your own videos");
+            }
+            // Update video details
+            videoDetails.setTitle(videoDetailsDTO.getTitle());
+            videoDetails.setDescription(videoDetailsDTO.getDescription());
+            videoDetails.setIsPublic(videoDetailsDTO.getIsPublic());
+            videoDetails.setUpdatedAt(java.time.LocalDateTime.now().toString());
+            videoDao.save(videoDetails);
+            return ResponseEntity.ok("Video details updated successfully");
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ResponseEntity<String> uploadThumbnail(String videoId, MultipartFile file, String userId) {
+        Optional<VideoDetails> videoOpt = videoDao.findById(videoId);
+        if( videoOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Video not found");
+        }
+        VideoDetails video = videoOpt.get();
+        if (file.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File is empty");
+        }
+        String fileName = file.getOriginalFilename();
+        if (fileName == null || !(fileName.toLowerCase().endsWith(".jpg") ||
+                fileName.toLowerCase().endsWith(".jpeg") ||
+                fileName.toLowerCase().endsWith(".png"))) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid file type");
+        }
+        Path filePath;
+        try {
+            filePath = Paths.get(thumbnailUploadDirectory, videoId + "_" + URLEncoder.encode(fileName, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Encoding error");
+        }
+        try {
+            Files.createDirectories(filePath.getParent());
+            Files.write(filePath, file.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        video.setThumbnailUrl(filePath.toString());
+        videoDao.save(video);
+        return ResponseEntity.status(HttpStatus.OK).body("Thumbnail uploaded successfully");
+    }
+
+    public ResponseEntity<byte[]> getThumbnail(String videoId) {
+        Optional<VideoDetails> videoOpt = videoDao.findById(videoId);
+        if (videoOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        VideoDetails video = videoOpt.get();
+        String thumbnailUrl = video.getThumbnailUrl();
+        if (thumbnailUrl == null || thumbnailUrl.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        Path thumbnailPath = Paths.get(thumbnailUrl);
+        if (!Files.exists(thumbnailPath)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        try {
+            byte[] thumbnailBytes = Files.readAllBytes(thumbnailPath);
+            return ResponseEntity.ok()
+                    .header("Content-Type", getContentTypeForImage(thumbnailUrl))
+                    .body(thumbnailBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    private String getContentTypeForImage(String filePath) {
+        String lower = filePath.toLowerCase();
+        if (lower.endsWith(".png")) {
+            return "image/png";
+        } else if (lower.endsWith(".jpg") || lower.endsWith(".jpeg")) {
+            return "image/jpeg";
+        }
+        return "application/octet-stream";
     }
 }
