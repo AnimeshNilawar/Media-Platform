@@ -16,5 +16,4 @@ public class VideoProcessingRequest implements Serializable {
     private String fileExtension;
     private long fileSize;
     private String uploaderId;
-    private String channelId;
 }

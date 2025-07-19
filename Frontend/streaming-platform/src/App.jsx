@@ -26,15 +26,17 @@ function App() {
   return (
     <Router>
       <Navbar onLogout={handleLogout} isAuthenticated={isAuthenticated} />
-      {isAuthenticated ? (
-        <Routes>
-          <Route path="/upload" element={<VideoUpload />} />
-          <Route path="/player" element={<VideoPlayer />} />
-          <Route path="*" element={<Navigate to="/upload" replace />} />
-        </Routes>
-      ) : (
-        <AuthPage onAuthSuccess={handleAuthSuccess} />
-      )}
+      <div className="main-centered">
+        {isAuthenticated ? (
+          <Routes>
+            <Route path="/upload" element={<VideoUpload />} />
+            <Route path="/player" element={<VideoPlayer />} />
+            <Route path="*" element={<Navigate to="/upload" replace />} />
+          </Routes>
+        ) : (
+          <AuthPage onAuthSuccess={handleAuthSuccess} />
+        )}
+      </div>
     </Router>
   );
 }

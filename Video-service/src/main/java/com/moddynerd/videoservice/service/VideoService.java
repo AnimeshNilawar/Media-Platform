@@ -43,7 +43,7 @@ public class VideoService {
     private String thumbnailUploadDirectory;
 
     public ResponseEntity<String> saveVideoDetails(MultipartFile file, String title, String description,
-            Boolean isPublic, String channelId, String uploaderId) {
+            Boolean isPublic, String uploaderId) {
         // Generate a unique VideoId
         String videoId = GenerateVideoId.generate();
 
@@ -96,7 +96,6 @@ public class VideoService {
             processingRequest.setFileExtension(getFileExtension(file.getOriginalFilename()));
             processingRequest.setFileSize(file.getSize());
             processingRequest.setUploaderId(uploaderId);
-            processingRequest.setChannelId(channelId);
 
             videoProcessingServiceClient.processVideo(processingRequest);
         } catch (Exception e) {

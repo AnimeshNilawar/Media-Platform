@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class LikeService {
 
@@ -45,6 +47,16 @@ public class LikeService {
             like.setLiked(isLiked);
             likeDao.save(like);
             return ResponseEntity.ok("Video " + (isLiked ? "liked" : "disliked") + " successfully for video: " + videoId);
+        }
+    }
+
+    public ResponseEntity<?> getLikeCount(String videoId) {
+        if (!checkVideoExists(videoId)) {
+            return ResponseEntity.badRequest().body("Video does not exist");
+        } else {
+            long likeCount = likeDao.countByVideoIdAndLiked(videoId, true);
+            long dislikeCount = likeDao.countByVideoIdAndLiked(videoId, false);
+            return ResponseEntity.ok(Map.of("likes", likeCount, "dislikes", dislikeCount));
         }
     }
 }

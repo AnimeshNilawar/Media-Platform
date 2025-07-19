@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bf0183f-b5ce-4891-838e-0fcd433126a9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/controller/LikeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/controller/LikeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/dao/LikeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/dao/LikeDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/service/LikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Engagement-Service/src/main/java/com/moddynerd/engagementservice/service/LikeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/streaming-platform/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/streaming-platform/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/streaming-platform/src/VideoPlayer.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/streaming-platform/src/VideoPlayer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/streaming-platform/src/VideoPlayer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/streaming-platform/src/VideoPlayer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-Processing-Service/src/main/java/com/moddynerd/videoprocessingservice/model/VideoProcessingRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-Processing-Service/src/main/java/com/moddynerd/videoprocessingservice/model/VideoProcessingRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/controller/VideoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/controller/VideoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/dto/VideoProcessingRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/dto/VideoProcessingRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/service/VideoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Video-service/src/main/java/com/moddynerd/videoservice/service/VideoService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +96,7 @@
       <workItem from="1752477724703" duration="1210000" />
       <workItem from="1752521396603" duration="5587000" />
       <workItem from="1752667317731" duration="651000" />
-      <workItem from="1752668039187" duration="666000" />
+      <workItem from="1752668039187" duration="1877000" />
     </task>
     <servers />
   </component>

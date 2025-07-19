@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface LikeDao extends JpaRepository<Like, Integer> {
     Like findByVideoIdAndUserId(String videoId, String userId);
+    Integer countByVideoIdAndLiked(String videoId, boolean liked);
 }

@@ -26,7 +26,6 @@ public class VideoController {
         private String title;
         private String description;
         private Boolean isPublic;
-        private String channelId;
         private String uploaderId;
 
     }
@@ -35,7 +34,9 @@ public class VideoController {
     @PostMapping(value = "/upload", consumes = "multipart/form-data")
     public ResponseEntity<String> uploadVideo(
             @RequestParam("file") MultipartFile file,
-            @RequestParam("data") String jsonData) {
+            @RequestParam("data") String jsonData,
+            @RequestHeader("X-User-Id") String userId
+            ) {
         try {
             // Parse JSON data
             VideoMetadata metadata = objectMapper.readValue(jsonData, VideoMetadata.class);
@@ -45,8 +46,7 @@ public class VideoController {
                     metadata.getTitle(),
                     metadata.getDescription(),
                     metadata.getIsPublic(),
-                    metadata.getChannelId(),
-                    metadata.getUploaderId()
+                    userId
             );
         } catch (Exception e) {
             e.printStackTrace();

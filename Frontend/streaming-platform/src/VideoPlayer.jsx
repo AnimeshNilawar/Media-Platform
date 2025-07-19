@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './VideoPlayer.css';
@@ -11,8 +12,50 @@ const VideoPlayer = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [videoDetails, setVideoDetails] = useState(null);
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-    const [aspectRatio, setAspectRatio] = useState('16:9'); // Used only for initial setup
+    const [aspectRatio] = useState('16:9'); // Used only for initial setup
     const [videoJsLoaded, setVideoJsLoaded] = useState(false);
+    const [likeDislike, setLikeDislike] = useState({ likes: 0, dislikes: 0 });
+    // Fetch like/dislike count
+    const fetchLikeDislike = async (videoId) => {
+        if (!videoId) return;
+        try {
+            const response = await fetch(`http://localhost:8765/engage/like/${videoId}/count`, {
+                headers: {
+                    ...getAuthHeaders()
+                }
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setLikeDislike({
+                    likes: data.likes || 0,
+                    dislikes: data.dislikes || 0
+                });
+            } else {
+                setLikeDislike({ likes: 0, dislikes: 0 });
+            }
+        } catch {
+            setLikeDislike({ likes: 0, dislikes: 0 });
+        }
+    };
+
+    // Like/dislike handlers
+    const handleLikeDislike = async (value) => {
+    if (!videoId) return;
+        try {
+            await fetch(`http://localhost:8765/engage/like/${videoId}/${value}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...getAuthHeaders()
+                }
+            });
+            // Refresh like/dislike count
+            fetchLikeDislike(videoId);
+        } catch (e) {
+            console.error('Error updating like/dislike:', e);
+            alert('Failed to update like/dislike. Please try again later.');
+        }
+    };
 
     // Extract videoId from URL query param
     useEffect(() => {
@@ -234,6 +277,9 @@ const VideoPlayer = () => {
         if (videoId && videoJsLoaded) {
             loadVideo();
         }
+        if (videoId) {
+            fetchLikeDislike(videoId);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [videoId, videoJsLoaded]);
 
@@ -298,17 +344,17 @@ const VideoPlayer = () => {
 
                         <div className="video-engagement">
                             <div className="engagement-buttons">
-                                <button className="like-btn">
+                                <button className="like-btn" onClick={() => handleLikeDislike(1)}>
                                     <svg className="icon" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z" />
                                     </svg>
-                                    {formatViewCount(videoDetails.likeCount)}
+                                    {formatViewCount(likeDislike.likes)}
                                 </button>
-                                <button className="dislike-btn">
+                                <button className="dislike-btn" onClick={() => handleLikeDislike(0)}>
                                     <svg className="icon" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v1.91l.01.01L1 14c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z" />
                                     </svg>
-                                    {formatViewCount(videoDetails.dislikeCount)}
+                                    {formatViewCount(likeDislike.dislikes)}
                                 </button>
                                 <button className="share-btn">
                                     <svg className="icon" viewBox="0 0 24 24" fill="currentColor">
@@ -322,7 +368,7 @@ const VideoPlayer = () => {
                         <div className="video-description">
                             <h4>Description</h4>
                             <p>{videoDetails.description}</p>
-                            <div className="video-stats">
+                            {/* <div className="video-stats">
                                 <div className="stat-item">
                                     <strong>Video ID:</strong> {videoDetails.id}
                                 </div>
@@ -335,13 +381,13 @@ const VideoPlayer = () => {
                                         {videoDetails.isPublic ? 'Public' : 'Private'}
                                     </span>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 )}
             </div>
 
-            <div className="quality-info">
+            {/* <div className="quality-info">
                 <h3>How it works:</h3>
                 <div className="info-grid">
                     <div className="info-item">
@@ -373,7 +419,7 @@ const VideoPlayer = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };
